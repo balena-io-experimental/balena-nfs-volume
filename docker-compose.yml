@@ -1,0 +1,24 @@
+version: '2'
+volumes:
+  nfs:
+services:
+  server:
+    build: ./server
+    volumes:
+      - 'nfs:/nfsroot'
+    network_mode: host
+    privileged: true
+    labels:
+      io.balena.features.kernel-modules: "1"
+      io.balena.features.sysfs: "1"
+      io.balena.features.procfs: "1"
+    environment:
+      NFSMOUNT: '/nfsroot'
+
+  client:
+    build: ./client
+    network_mode: host
+    privileged: true
+    environment:
+      NFSMOUNT: '/nfsroot'
+      NFS_HOST: '127.0.0.1'
