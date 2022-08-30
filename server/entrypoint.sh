@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "${NFSMOUNT} *(fsid=0,rw,sync,no_subtree_check,all_squash,anonuid=65534,anongid=65534)" > /etc/exports
+echo "${NFSMOUNT} *(rw,sync,no_subtree_check,no_root_squash,no_all_squash)" > /etc/exports
 
 ## Load modules
 modprobe nfs
